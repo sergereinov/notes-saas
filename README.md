@@ -2,7 +2,16 @@
 
 This is a collection of small and simple learning pet projects.
 
-Learning patterns:
+The entire Notes Service (SaaS) as a whole is an analogue of the ToDo training task.
+
+Basic goals / user stories:
+1. Notes are folded into books (notebooks).
+2. Notes have a custom structure that is common within the same book.
+3. (task with an asterisk) Books can be put into bags (notebooks bags)
+
+Inspiration can be drawn from projects such as [Notion](https://www.notion.so).
+
+Subproject learning patterns:
 - Html + javascript
     - Html layouting + javascript + react,
     - Javascipt + nodejs development pipelines
@@ -22,6 +31,7 @@ Learning patterns:
 
 ```mermaid
 graph TD
+    %% mermaid docs ref https://mermaid-js.github.io/mermaid/#/
     F --> B
     K --> |REST| B
     B --> |REST,gRPC?| A
@@ -50,5 +60,15 @@ graph TD
     class M,S svc
 ```
 
-## Refs
-- mermaid docs https://mermaid-js.github.io/mermaid/#/
+## Prerequisites
+
+Tools / Env.
+
+## License
+
+MIT
+(TODO: add license file)
+
+## Colab
+
+Ask me.
