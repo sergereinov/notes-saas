@@ -32,29 +32,29 @@ Subproject learning patterns:
 ```mermaid
 graph TD
     %% mermaid docs ref https://mermaid-js.github.io/mermaid/#/
-    F --> B
-    K --> |REST| B
-    B --> |REST,gRPC?| A
-    B --> |REST,gRPC?| N
-    A --> |gRPC/lib| S1
-    N --> |gRPC/lib| S2
+    Frontend --> BFF
+    Kotlin --> |REST| BFF
+    BFF --> |REST,gRPC?| Auth
+    BFF --> |REST,gRPC?| Notes
+    Auth --> |gRPC/lib| Storage1
+    Notes --> |gRPC/lib| Storage2
     
-    F["Frontend<br/>(html+js+react?)"]
-    K["Mobile app<br/>(kotlin)"]
+    Frontend["Frontend<br/>(html+js+react?)"]
+    Kotlin["Mobile app<br/>(kotlin)"]
     subgraph Cloud
-        B["BFF<br/>(nodejs?)"]
+        BFF["BFF<br/>(nodejs?)"]
         subgraph M ["Services"]
-            A["Auth<br/>(golang)"]
-            N["Notes<br/>(golang)"]
+            Auth["Auth<br/>(golang)"]
+            Notes["Notes<br/>(golang)"]
         end
         subgraph S ["Services / DB"]
-            S1[("Auth Storage<br/>(golang/3rd side)")]
-            S2[("Notes Storage<br/>(golang/3rd side)")]
+            Storage1[("Auth Storage<br/>(golang/3rd side)")]
+            Storage2[("Notes Storage<br/>(golang/3rd side)")]
         end
     end
     
     classDef userspace fill:#f99
-    class F,K userspace
+    class Frontend,Kotlin userspace
     style Cloud fill:#ffe
     classDef svc fill:#ffc
     class M,S svc
