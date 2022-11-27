@@ -76,54 +76,48 @@ graph TD
     Account --> UserDB
     Authentication --> AuthenticationDB
     Permission --> PermissionDB
-
+    
     subgraph Auth
         API["API gateway"]
         Account["Account/User<br/>(golang)"]
         Authentication["Authentication<br/>(golang)"]
         PermissionAPI(["Permissions API"])
         Permission["Permissions/Authorization<br/>(golang)"]
-    
-        subgraph DB
+        
+        subgraph Storage
             AuthenticationDB[("Authentication<br/>DB")]
             UserDB[("Users/Personal Info<br/>DB")]
             PermissionDB[("Permissions<br/>DB")]        
+            MQ(("MQ/Saga<br/>(kafka)"))
         end    
     end
     
-    style DB fill:#ffc
+    style Storage fill:#ffc
 ```
 
 <p align="center"><b>Set of Notes services</b></p>
 
 ```mermaid
 graph TD
-
     API --> |gRPC| Document
     API --> |gRPC| Fold
     
-    Document --> DB1
-    DB1 --> DocumentDB
-    Document --> MQ
-    Fold --> DB2
-    DB2 --> FoldDB
-    Fold --> MQ
+    Document --> DocumentDB
+    Fold --> FoldDB
     
     subgraph Notes
         API["API gateway"]
         Document["Document<br/>(golang)"]
         Fold["Books and Bags folding<br/>(golang)"]
-        DB1(("DB"))
-        MQ("MQ<br/>(kafka)")
-        DB2(("DB"))
-       
-        subgraph DB
+        
+        subgraph Storage
             DocumentDB[("Documents<br/>DB")]
             FoldDB[("Folds<br/>DB")]
+            MQ(("MQ/Saga<br/>(kafka)"))
         end
     end
    
-    style DB fill:#ffc
+    style Storage fill:#ffc
 ```
 
 ## Prerequisites
