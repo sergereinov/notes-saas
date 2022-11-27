@@ -102,20 +102,27 @@ graph TD
     API --> |gRPC| Document
     API --> |gRPC| Fold
     
-    Document --> DocumentDB
-    Fold --> FoldDB
+    Document --> DB1
+    DB1 --> DocumentDB
+    Document --> MQ
+    Fold --> DB2
+    DB2 --> FoldDB
+    Fold --> MQ
     
     subgraph Notes
         API["API gateway"]
         Document["Document<br/>(golang)"]
         Fold["Books and Bags folding<br/>(golang)"]
-        
+        DB1(("DB"))
+        MQ("MQ<br/>(kafka)")
+        DB2(("DB"))
+       
         subgraph DB
             DocumentDB[("Documents<br/>DB")]
             FoldDB[("Folds<br/>DB")]
         end
     end
-    
+   
     style DB fill:#ffc
 ```
 
