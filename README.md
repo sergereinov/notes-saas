@@ -34,11 +34,11 @@ graph TD
     %% mermaid docs ref https://mermaid-js.github.io/mermaid/#/
     Frontend --> BFF
     Kotlin --> |REST| BFF
-    BFF --> |REST,gRPC?| Auth
+    BFF --> |REST,gRPC?| Account
     BFF --> |REST,gRPC?| Notes
-    Auth --> |gRPC/lib| Storage1
+    Account --> |gRPC/lib| Storage1
     Notes --> |gRPC/lib| Storage2
-    Notes --> |gRPC| Auth
+    Notes --> |gRPC| Account
     
     Frontend["Frontend<br/>(html+js+react?)"]
     Kotlin["Mobile app<br/>(kotlin)"]
@@ -46,11 +46,11 @@ graph TD
         BFF["BFF<br/>(nodejs?)"]
         subgraph M ["Services"]
             direction RL
-            Auth["Auth<br/>(golang)"]
+            Account["Account<br/>(golang)"]
             Notes["Notes<br/>(golang)"]
         end
-        subgraph S ["Services / DB"]
-            Storage1[("Auth Storage<br/>(golang/3rd side)")]
+        subgraph S ["Services/DB"]
+            Storage1[("Account Storage<br/>(golang/3rd side)")]
             Storage2[("Notes Storage<br/>(golang/3rd side)")]
         end
     end
@@ -62,7 +62,7 @@ graph TD
     class M,S svc
 ```
 
-<p align="center"><b>Set of Auth services</b></p>
+<p align="center"><b>Set of Account services</b></p>
 
 ```mermaid
 graph TD
@@ -77,7 +77,7 @@ graph TD
     Authentication --> AuthenticationDB
     Permission --> PermissionDB
     
-    subgraph Auth
+    subgraph Acc["Account"]
         API["API gateway"]
         Account["Account/User<br/>(golang)"]
         Authentication["Authentication<br/>(golang)"]
@@ -92,6 +92,7 @@ graph TD
         end    
     end
     
+    style Acc fill:#ffe
     style Storage fill:#ffc
 ```
 
@@ -117,6 +118,7 @@ graph TD
         end
     end
    
+    style Notes fill:#ffe
     style Storage fill:#ffc
 ```
 
