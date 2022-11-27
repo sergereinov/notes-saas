@@ -66,11 +66,16 @@ graph TD
 
 ```mermaid
 graph TD
+
     API --> |gRPC| Account
     API -.-> PermissionAPI
     Account --> |gRPC| Authentication
     Account --> |gRPC| Permission
     PermissionAPI --> |gRPC| Permission
+    
+    Account --> UserDB
+    Authentication --> AuthenticationDB
+    Permission --> PermissionDB
 
     subgraph Auth
         API["API gateway"]
@@ -78,21 +83,40 @@ graph TD
         Authentication["Authentication<br/>(golang)"]
         PermissionAPI(["Permissions API"])
         Permission["Permissions/Authorization<br/>(golang)"]
+    
+        subgraph DB
+            AuthenticationDB[("Authentication<br/>DB")]
+            UserDB[("Users/Personal Info<br/>DB")]
+            PermissionDB[("Permissions<br/>DB")]        
+        end    
     end
+    
+    style DB fill:#ffc
 ```
 
 <p align="center"><b>Set of Notes services</b></p>
 
 ```mermaid
 graph TD
+
     API --> |gRPC| Document
     API --> |gRPC| Fold
+    
+    Document --> DocumentDB
+    Fold --> FoldDB
     
     subgraph Notes
         API["API gateway"]
         Document["Document<br/>(golang)"]
         Fold["Books and Bags folding<br/>(golang)"]
+        
+        subgraph DB
+            DocumentDB[("Documents<br/>DB")]
+            FoldDB[("Folds<br/>DB")]
+        end
     end
+    
+    style DB fill:#ffc
 ```
 
 ## Prerequisites
