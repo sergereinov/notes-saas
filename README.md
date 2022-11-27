@@ -38,12 +38,14 @@ graph TD
     BFF --> |REST,gRPC?| Notes
     Auth --> |gRPC/lib| Storage1
     Notes --> |gRPC/lib| Storage2
+    Notes --> |gRPC| Auth
     
     Frontend["Frontend<br/>(html+js+react?)"]
     Kotlin["Mobile app<br/>(kotlin)"]
     subgraph Cloud
         BFF["BFF<br/>(nodejs?)"]
         subgraph M ["Services"]
+            direction RL
             Auth["Auth<br/>(golang)"]
             Notes["Notes<br/>(golang)"]
         end
@@ -58,6 +60,39 @@ graph TD
     style Cloud fill:#ffe
     classDef svc fill:#ffc
     class M,S svc
+```
+
+<p align="center"><b>Set of Auth services</b></p>
+
+```mermaid
+graph TD
+    API --> |gRPC| Account
+    API -.-> PermissionAPI
+    Account --> |gRPC| Authentication
+    Account --> |gRPC| Permission
+    PermissionAPI --> |gRPC| Permission
+
+    subgraph Auth
+        API["API gateway"]
+        Account["Account/User<br/>(golang)"]
+        Authentication["Authentication<br/>(golang)"]
+        PermissionAPI(["Permissions API"])
+        Permission["Permissions/Authorization<br/>(golang)"]
+    end
+```
+
+<p align="center"><b>Set of Notes services</b></p>
+
+```mermaid
+graph TD
+    API --> |gRPC| Document
+    API --> |gRPC| Fold
+    
+    subgraph Notes
+        API["API gateway"]
+        Document["Document<br/>(golang)"]
+        Fold["Books and Bags folding<br/>(golang)"]
+    end
 ```
 
 ## Prerequisites
