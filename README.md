@@ -62,6 +62,11 @@ graph TD
     class M,S svc
 ```
 
+<details><summary>Hard mode</summary>
+
+### Advanced tasks/things
+_(think about it later)_
+    
 <p align="center"><b>Set of Notes services</b></p>
 
 ```mermaid
@@ -124,8 +129,7 @@ graph TD
 
 (draft) Permission structure: (by who) -  (to whom) -  (of what) - (and how)
 
-<details><summary>Account sequences</summary>
-</details>
+<details><summary>Account subsequences</summary>
 
 ```mermaid
 sequenceDiagram
@@ -151,6 +155,10 @@ sequenceDiagram
     Note over acc,permdb: Check permission
     Note over acc,permdb: List permissions
 ```
+
+</details>
+
+</details>
 
 ## Prerequisites
 
