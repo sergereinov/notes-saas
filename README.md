@@ -62,6 +62,37 @@ graph TD
     class M,S svc
 ```
 
+<details><summary>Hard mode</summary>
+
+### Advanced tasks/things
+_(think about it later)_
+    
+<p align="center"><b>Set of Notes services</b></p>
+
+```mermaid
+graph TD
+    API --> |gRPC| Document
+    API --> |gRPC| Fold
+    
+    Document --> DocumentDB
+    Fold --> FoldDB
+    
+    subgraph Notes
+        API["API gateway"]
+        Document["Document<br/>(golang)"]
+        Fold["Books and Bags folding<br/>(golang)"]
+        
+        subgraph Storage
+            DocumentDB[("Documents<br/>DB")]
+            FoldDB[("Folds<br/>DB")]
+            MQ(("MQ/Saga<br/>(kafka)"))
+        end
+    end
+   
+    style Notes fill:#ffe
+    style Storage fill:#ffc
+```
+
 <p align="center"><b>Set of Account services</b></p>
 
 ```mermaid
@@ -96,31 +127,38 @@ graph TD
     style Storage fill:#ffc
 ```
 
-<p align="center"><b>Set of Notes services</b></p>
+(draft) Permission structure: (by who) -  (to whom) -  (of what) - (and how)
+
+<details><summary>Account subsequences</summary>
 
 ```mermaid
-graph TD
-    API --> |gRPC| Document
-    API --> |gRPC| Fold
+sequenceDiagram
+    participant acc as Account<br/>service
+    participant auth as Authentication<br/>service
+    participant perm as Permissions<br/>service
+    participant accdb as Account<br/>DB
+    participant authdb as Authentication<br/>DB
+    participant permdb as Permissions<br/>DB
     
-    Document --> DocumentDB
-    Fold --> FoldDB
+    Note over acc,permdb: Create new user
+    Note over acc,permdb: Delete the user
+    Note over acc,permdb: Update password
+    Note over acc,permdb: Update personal information
+    Note over acc,permdb: Read personal information
     
-    subgraph Notes
-        API["API gateway"]
-        Document["Document<br/>(golang)"]
-        Fold["Books and Bags folding<br/>(golang)"]
-        
-        subgraph Storage
-            DocumentDB[("Documents<br/>DB")]
-            FoldDB[("Folds<br/>DB")]
-            MQ(("MQ/Saga<br/>(kafka)"))
-        end
-    end
-   
-    style Notes fill:#ffe
-    style Storage fill:#ffc
+    Note over acc,permdb: Find users
+
+    Note over acc,permdb: Verify credentials (log in)
+    
+    Note over acc,permdb: Add permission
+    Note over acc,permdb: Remove permission
+    Note over acc,permdb: Check permission
+    Note over acc,permdb: List permissions
 ```
+
+</details>
+
+</details>
 
 ## Prerequisites
 
