@@ -7,7 +7,8 @@ The entire Notes Service (SaaS) as a whole is an analogue of the ToDo training t
 Basic goals / user stories:
 1. Notes are folded into books (notebooks).
 2. Notes have a custom structure that is common within the same book.
-3. (task with an asterisk) Books can be put into bags (notebooks bags)
+3. (task with an asterisk) Books can be put into bags (notebooks bags).
+4. (task with an asterisk2) Use [rqlite](https://github.com/rqlite/rqlite) as storage.
 
 Inspiration can be drawn from projects such as [Notion](https://www.notion.so).
 
